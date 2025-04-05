@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Policy Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6e13d0cf;
+            --secondary-color: #6281bc;
+            --background-color: #f0f7f4;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui;
+            background-color: var(--background-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(rgba(13, 13, 75, 0.662), rgba(71, 9, 132, 0.366)),
+                        url('nature-bg.jpg');
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+            background-size: cover;
+        }
+
+        .navbar {
+            background: var(--primary-color);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .policy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .policy-card {
+            background: rgba(71, 9, 132, 0.366);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .policy-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .document-badge {
+            background: var(--secondary-color);
+            color: rgb(81, 117, 134,0.721);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .verified-icon {
+            color: #000700;
+            margin-left: 0.5rem;
+        }
+
+        .data-section {
+            background: rgba(71, 9, 132, 0.366);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 10px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: 25px;
+            margin: 2rem 0;
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        /* Comment Section Styles */
+        .comments-section {
+            margin: 2rem 0;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .comment-form {
+            margin-bottom: 2rem;
+        }
+
+        .comment {
+            background: #46719b;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .policy-comments {
+            margin-top: 2rem;
+            border-top: 2px solid #eee;
+            padding-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Global Environmental Policy Tracker</h1>
+        <p>Verified Information Hub for Climate Action</p>
+    </header>
+
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#policies"><i class="fas fa-scroll"></i> Policies</a></li>
+            <li><a href="#data"><i class="fas fa-database"></i> Climate Data</a></li>
+            <li><a href="#actions"><i class="fas fa-hands-helping"></i> Take Action</a></li>
+            <li><a href="#sources"><i class="fas fa-file-certificate"></i> Official Sources</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <section id="policies">
+            <h2>Key Environmental Policies</h2>
+            <input type="text" class="search-bar" placeholder="Search policies...">
+            
+            <div class="policy-grid" id="policyContainer">
+                <!-- Policies will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <section class="data-section" id="data">
+            <h2>Climate Change Evidence</h2>
+            <div class="climate-facts">
+                <div class="fact-card">
+                    <h3>IPCC Sixth Assessment Report</h3>
+                    <p>Latest scientific consensus on climate change</p>
+                    <a href="https://www.ipcc.ch/assessment-report/ar6/" 
+                       class="document-badge" target="_blank">
+                        View Report <i class="fas fa-external-link-alt"></i>
+                    </a>
+                    <span class="verified-icon"><i class="fas fa-check-circle"></i> Verified Source</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="actions">
+            <h2>Citizen Action Portal</h2>
+            <div class="action-panel">
+                <div class="petition-form">
+                    <h3>Global Climate Petition</h3>
+                    <form id="climatePetition">
+                        <div class="form-group">
+                            <input type="text" placeholder="Full Name" required>
+                            <input type="email" placeholder="Email" required>
+                            <input type="text" placeholder="Country" required>
+                        </div>
+                        <button type="submit" class="cta-button">
+                            <i class="fas fa-pen-fancy"></i> Sign Petition
+                        </button>
+                    </form>
+                    <div id="signatureCounter">Current Signatures: 24,591</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comment Section -->
+        <section class="comments-section">
+            <h2>Public Discourse</h2>
+            <div class="comment-form">
+                <h3>Share Your Perspective</h3>
+                <form id="commentForm">
+                    <input type="text" id="policySelect" placeholder="Policy Title" required>
+                    <input type="text" id="userName" placeholder="Your Name" required>
+                    <textarea id="commentText" rows="3" placeholder="Your analysis or opinion..." required></textarea>
+                    <button type="submit">Post Comment</button>
+                </form>
+            </div>
+            
+            <div class="policy-comments" id="commentsContainer">
+                <!-- Comments will be loaded here -->
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Verified data sources from:</p>
+        <div class="source-logos">
+            <a href="https://unfccc.int" target="_blank">UNFCCC</a> | 
+            <a href="https://www.epa.gov" target="_blank">EPA</a> | 
+            <a href="https://ec.europa.eu" target="_blank">EU Commission</a>
+        </div>
+    </footer>
+
+    <script>
+        // Policy Data
+        const policies = [
+            {
+                title: "Paris Agreement (2015)",
+                description: "International climate accord adopted by 196 parties",
+                link: "https://unfccc.int/sites/default/files/english_paris_agreement.pdf",
+                type: "international",
+                verified: true
+            },
+            {
+                title: "EU Green Deal (2020)",
+                description: "European climate neutrality plan by 2050",
+                link: "https://ec.europa.eu/info/strategy/priorities-2019-2024/european-green-deal_en",
+                type: "regional",
+                verified: true
+            },
+            {
+                title: "US Inflation Reduction Act (2022)",
+                description: "$369 billion climate investment package",
+                link: "https://www.congress.gov/bill/117th-congress/house-bill/5376/text",
+                type: "national",
+                verified: true
+            }
+        ];
+
+        // Dynamic Policy Loader
+        function loadPolicies() {
+            const container = document.getElementById('policyContainer');
+            
+            policies.forEach(policy => {
+                const card = document.createElement('div');
+                card.className = 'policy-card';
+                card.innerHTML = `
+                    <h3>${policy.title}</h3>
+                    <p>${policy.description}</p>
+                    <a href="${policy.link}" target="_blank" class="document-badge">
+                        Official Document <i class="fas fa-file-pdf"></i>
+                    </a>
+                    ${policy.verified ? 
+                        '<span class="verified-icon"><i class="fas fa-check-circle"></i> Government Verified</span>' : ''}
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Petition Form Handling
+        document.getElementById('climatePetition').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const counter = document.getElementById('signatureCounter');
+            const current = parseInt(counter.textContent.match(/\d+/)[0]);
+            counter.textContent = `Current Signatures: ${current + 1}`;
+            alert('Thank you for adding your voice!');
+            e.target.reset();
+        });
+
+        // Search Functionality
+        document.querySelector('.search-bar').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll('.policy-card');
+            
+            cards.forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+
+        // Comment System
+        let comments = JSON.parse(localStorage.getItem('policyComments')) || [];
+
+        function saveComment(policyTitle, userName, commentText) {
+            const newComment = {
+                policy: policyTitle,
+                author: userName,
+                text: commentText,
+                date: new Date().toISOString(),
+                verified: false
+            };
+            
+            comments.push(newComment);
+            localStorage.setItem('policyComments', JSON.stringify(comments));
+            displayComments();
+        }
+
+        function displayComments(filterPolicy = '') {
+            const container = document.getElementById('commentsContainer');
+            container.innerHTML = '';
+
+            comments
+                .filter(c => !filterPolicy || c.policy === filterPolicy)
+                .forEach(comment => {
+                    const commentDiv = document.createElement('div');
+                    commentDiv.className = 'comment';
+                    commentDiv.innerHTML = `
+                        <div class="comment-header">
+                            <span>${comment.author}</span>
+                            <span>${new Date(comment.date).toLocaleDateString()}</span>
+                        </div>
+                        <p><strong>Policy:</strong> ${comment.policy}</p>
+                        <p>${comment.text}</p>
+                    `;
+                    container.appendChild(commentDiv);
+                });
+        }
+
+        document.getElementById('commentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const policyTitle = document.getElementById('policySelect').value;
+            const userName = document.getElementById('userName').value;
+            const commentText = document.getElementById('commentText').value;
+
+            if (policyTitle && userName && commentText) {
+                saveComment(policyTitle, userName, commentText);
+                this.reset();
+            }
+        });
+
+        document.getElementById('policySelect').addEventListener('input', function(e) {
+            const datalist = document.getElementById('policyTitles');
+            if (!datalist) {
+                const dl = document.createElement('datalist');
+                dl.id = 'policyTitles';
+                policies.forEach(policy => {
+                    const option = document.createElement('option');
+                    option.value = policy.title;
+                    dl.appendChild(option);
+                });
+                this.parentNode.appendChild(dl);
+            }
+            this.setAttribute('list', 'policyTitles');
+        });
+
+        // Initialize
+        loadPolicies();
+        displayComments();
+    </script>
+</body>
+</html>
